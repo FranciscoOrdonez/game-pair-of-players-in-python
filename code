@@ -1,0 +1,41 @@
+# GAME PAIR OF PLAYERS
+#This function check(n, m, games) takes 3 arguments:
+#n: an integer that represents the number of players
+#m: an integer that represents the number of rounds of games
+#games: a 2-dimensional list that represents the m rounds of games among n players
+#The function aims to check if all pairs of players have played against each other in the m rounds of games.
+#To achieve this, the function starts by generating a list of all possible pairs of players using a nested list
+#comprehension group_of_pairs = [(i, j) for i in range(1, n + 1) for j in range(i + 1, n + 1)].
+#Then, for each pair of players in the group_of_pairs list, the function iterates through the games list and checks
+#if both players have played against each other in any of the rounds.The check is performed by splitting each round
+#game into two halves: the first half contains players from the first team and the second half contains players
+#from the second team. If the first player of the pair is in the first half and the second player of the pair
+#is in the second half or vice versa, then the both players have played against each other and the both_played 
+#variable is set to True. The inner loop is then broken.If the both_played variable is still False after going 
+#through all the rounds, then it means that the pair of players have not played against each other in any
+#of the rounds and the function returns False.  After going through all pairs of players, if the function
+#has not returned False, it returns True, meaning that all pairs of players have played against each other
+#in the m rounds of games.
+def check(n, m, games):
+    group_of_pairs = [(i, j) for i in range(1, n + 1) for j in range(i + 1, n + 1)]
+    
+    for i in group_of_pairs:
+        
+        both_played = False
+        for game in games:
+            
+            if (i[0] in game[:n//2] and i[1] in game[n//2:]) or (i[0] in game[n//2:] and i[1] in game[:n//2]):
+                both_played = True
+                
+                break
+        if not both_played:
+            
+            return False
+    return True
+
+#test cases
+print(check(2, 1, [[1, 2]])) # True
+print(check(4, 2, [[1, 2, 3, 4], [4, 3, 1, 2]])) # = False
+print(check(4, 2, [[1, 2, 3, 4], [1, 3, 2, 4]]))  # = True
+print(check(6, 6, [[1, 6, 3, 4, 5, 2], [6, 4, 2, 3, 1, 5], [4, 2, 1, 5, 6, 3], [4, 5, 1, 6, 2, 3], [3, 2, 5, 1, 6, 4], [2, 3, 6, 4, 1, 5]])) # = True
+print(check(6, 6, [[3, 1, 4, 5, 6, 2], [5, 3, 2, 4, 1, 6], [5, 3, 6, 4, 2, 1], [6, 5, 3, 2, 1, 4], [5, 4, 1, 2, 6, 3], [4, 1, 6, 2, 5, 3]]))  # false
