@@ -21,9 +21,18 @@ def check(n, m, games):
     
     for i in group_of_pairs:
         
-  # reserved code
-  
+        both_played = False
+        for game in games:
+            
+            if (i[0] in game[:n//2] and i[1] in game[n//2:]) or (i[0] in game[n//2:] and i[1] in game[:n//2]):
+                both_played = True
+                
+                break
+        if not both_played:
+            
+            return False
     return True
+
 
 #test cases
 print(check(2, 1, [[1, 2]])) # True
