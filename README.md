@@ -1,4 +1,4 @@
-# game-pair-of-players-in-python
+# game-pair-of-players-in-python - project for iopen
 The function aims to check if all pairs of players have played against each other in the m rounds of games
 
 You are given three arguments: n, m, games. Your task is to check that for all pairs of players 1≤𝑥,𝑦≤𝑛, player 𝑥 has played against 𝑦. games is a 2-dimensional list that represents the 𝑚 rounds of games among 𝑛 players.
